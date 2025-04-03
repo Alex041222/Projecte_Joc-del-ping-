@@ -1,5 +1,5 @@
 package controlador;
 
-public class cdfhj {
+public class Main {
 
 }
