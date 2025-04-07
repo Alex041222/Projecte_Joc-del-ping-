@@ -4,7 +4,7 @@ public class Foca extends Jugador {
 	private boolean soborno;
 	    
 	public Foca(String Nombre, String Color, int Posicion, boolean soborno) {
-	    super(Nombre, Color, Posicion); // Llamada al constructor de Jugador
+	    super(Posicion, Color, Nombre); // Llamada al constructor de Jugador
 	    this.soborno = soborno;
 	}
 	    
