@@ -38,5 +38,5 @@ public class Pingüino extends Jugador {
 	    inventario.eliminarItem(item);
 	}
 	
-}
+} prueba de cambio
 }
