@@ -89,4 +89,9 @@ public class Jugador {
         
         this.Posicion += resultado;
     }
+
+	public void volverAlInicio() {
+		// TODO Auto-generated method stub
+		
+	}
 }
