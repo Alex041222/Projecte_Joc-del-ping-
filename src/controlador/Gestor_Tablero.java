@@ -1,5 +1,9 @@
 package controlador;
 
-public class Gestor_Tablero {
 
+
+public class Gestor_Tablero {
+	
+	
 }
+	
