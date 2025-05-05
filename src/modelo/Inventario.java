@@ -26,6 +26,11 @@ public class Inventario {
         lista.add(item);
     }
 
+    // Método para eliminar un item del inventario
+    public void eliminarItem(Item item) {
+        lista.remove(item);
+    }
+
     // Para mostrar los items del inventario
     public void mostrarInventario() {
         for (Item item : lista) {

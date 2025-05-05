@@ -1,0 +1,8 @@
+INDEX VERSION 1.131+D:\bazofia\programación\Projecte_Joc-del-ping-\.metadata\.plugins\org.eclipse.jdt.core
+1545746284.index
+3952069700.index
+3827015942.index
+1865797976.index
+4242768837.index
+4184007935.index
+3424262121.index
