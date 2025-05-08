@@ -3,13 +3,11 @@ package modelo;
 import java.util.ArrayList;
 
 public class Tablero {
-	
     private ArrayList<Casilla> casillas;
     private ArrayList<Jugador> jugadores;
     private int turno;
     private Jugador jugadorActual;
 
-    // Constructor
     public Tablero() {
         this.casillas = new ArrayList<>();
         this.jugadores = new ArrayList<>();
@@ -17,7 +15,6 @@ public class Tablero {
         this.jugadorActual = null;
     }
 
-    // Getters
     public ArrayList<Casilla> getCasillas() {
         return casillas;
     }
@@ -34,7 +31,6 @@ public class Tablero {
         return jugadorActual;
     }
 
-    // Setters
     public void setCasillas(ArrayList<Casilla> casillas) {
         this.casillas = casillas;
     }
@@ -51,17 +47,18 @@ public class Tablero {
         this.jugadorActual = jugadorActual;
     }
 
-    // Método para actualizar el tablero al finalizar un turno
     public void actualizarTablero() {
-        // Avanza el turno al siguiente jugador en forma circular
         turno = (turno + 1) % jugadores.size();
         jugadorActual = jugadores.get(turno);
     }
 
-    // Método para ejecutar la acción de la casilla donde está el jugador
+    public void agregarJugador(Jugador jugador) {
+        jugadores.add(jugador);
+    }
+
     public void ejecutarAccionJugador(Jugador jugador) {
-        int posicion = jugador.getPosicion(); // Obtener la posición actual del jugador
-        Casilla casillaActual = casillas.get(posicion); // Obtener la casilla correspondiente
-        casillaActual.realizarAccion(jugador); // Ejecutar la acción de esa casilla
+        int posicion = jugador.getPosicion();
+        Casilla casillaActual = casillas.get(posicion);
+        casillaActual.realizarAccion(jugador);
     }
 }

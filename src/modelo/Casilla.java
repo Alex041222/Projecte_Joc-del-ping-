@@ -2,9 +2,9 @@ package modelo;
 
 import java.util.ArrayList;
 
-public abstract class Casilla {
-	
-	private int posicion;
+public class Casilla {
+
+    private int posicion;
     private ArrayList<Jugador> jugadoresActuales;
 
     public Casilla(int posicion) {
@@ -28,7 +28,17 @@ public abstract class Casilla {
         this.jugadoresActuales = jugadoresActuales;
     }
 
-    public abstract void realizarAccion(Jugador j);
-    public abstract void añadirJugador(Jugador j);
-    public abstract void quitarJugador(Jugador j);
-}	
+    // Implementación básica de acción
+    public void realizarAccion(Jugador j) {
+        System.out.println("El jugador " + j.getNombre() + " cae en una casilla normal.");
+        j.tirarDado();
+    }
+
+    public void añadirJugador(Jugador j) {
+        jugadoresActuales.add(j);
+    }
+
+    public void quitarJugador(Jugador j) {
+        jugadoresActuales.remove(j);
+    }
+}

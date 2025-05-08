@@ -28,6 +28,7 @@ public class Foca extends Jugador {
 	    
 	// Acción: la foca golpea a un pingüino
 	public void golpearJugador(Pingüino p) {
+		
 	    // Muestra un mensaje diciendo que golpeó al pingüino
 	    System.out.println("La foca golpea al pingüino " + p.getNombre());
 	}

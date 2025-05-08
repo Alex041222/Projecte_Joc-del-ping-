@@ -1,40 +1,28 @@
 package modelo;
 
 public class Pingüino extends Jugador {
-    private Inventario inventario;
 
-    public Pingüino(int Posicion, String Nombre, String Color) {
-        super(Posicion, Nombre, Color); // Llamo al constructor del Jugador
-        this.inventario = new Inventario();    
+    public Pingüino(int posicion, String nombre, String color) {
+        super(posicion, nombre, color);
     }
 
-    public Inventario getInventario() {
-        return inventario;
-    }
+    public void gestionarBatalla(Pingüino enemigo) {
+        System.out.println("Batalla entre " + getNombre() + " y " + enemigo.getNombre());
 
-    public void setInventario(Inventario inventario) {
-        this.inventario = inventario;
-    }
+        int fuerzaPropia = (int)(Math.random() * 6) + 1;
+        int fuerzaEnemigo = (int)(Math.random() * 6) + 1;
 
-    public void gestionarBatalla() {
-        // Implementa lógica para gestionar batalla
-        System.out.println("Gestionando la batalla...");
-    }
+        if (getInventario().tieneObjeto("Lanza")) fuerzaPropia += 2;
+        if (enemigo.getInventario().tieneObjeto("Escudo")) fuerzaEnemigo += 1;
 
-    public void usarObjeto() {
-        // Implementa lógica para usar un objeto del inventario
-        System.out.println("Usando objetos del inventario...");
-    }
-
-    public void añadirItem(Item item) {
-        // Implementa lógica para añadir un item al inventario
-        System.out.println("Añadiendo item: " + item.getNombre());
-        inventario.agregarItem(item);
-    }
-
-    public void quitarItem(Item item) {
-        // Implementa lógica para quitar un item del inventario
-        System.out.println("Quitando item: " + item.getNombre());
-        inventario.eliminarItem(item);
+        if (fuerzaPropia > fuerzaEnemigo) {
+            System.out.println(getNombre() + " gana la batalla.");
+            enemigo.volverAlInicio();
+        } else if (fuerzaPropia < fuerzaEnemigo) {
+            System.out.println(enemigo.getNombre() + " gana la batalla.");
+            volverAlInicio();
+        } else {
+            System.out.println("Empate. Nadie se mueve.");
+        }
     }
 }
