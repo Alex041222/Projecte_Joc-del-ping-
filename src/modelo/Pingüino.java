@@ -9,12 +9,15 @@ public class Pingüino extends Jugador {
     public void gestionarBatalla(Pingüino enemigo) {
         System.out.println("Batalla entre " + getNombre() + " y " + enemigo.getNombre());
 
+        
         int fuerzaPropia = (int)(Math.random() * 6) + 1;
         int fuerzaEnemigo = (int)(Math.random() * 6) + 1;
 
+        
         if (getInventario().tieneObjeto("Lanza")) fuerzaPropia += 2;
         if (enemigo.getInventario().tieneObjeto("Escudo")) fuerzaEnemigo += 1;
 
+        
         if (fuerzaPropia > fuerzaEnemigo) {
             System.out.println(getNombre() + " gana la batalla.");
             enemigo.volverAlInicio();

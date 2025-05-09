@@ -5,12 +5,13 @@ public class Jugador {
     private String nombre; 
     private String color; 
     private Inventario inventario;
+    private Tablero tablero;  // Referencia al tablero del jugador
     
     public Jugador(int posicion, String nombre, String color) {
-        this.posicion = posicion;  
-        this.nombre = nombre;      
-        this.color = color;        
-        this.inventario = new Inventario();
+        this.posicion = posicion;
+        this.nombre = nombre;
+        this.color = color;
+        this.inventario = new Inventario();  // Esto asumiendo que la clase Inventario está definida.
     }
 
     public int getPosicion() {
@@ -31,6 +32,10 @@ public class Jugador {
 
     public Inventario getInventario() {
         return inventario;
+    }
+
+    public Tablero getTablero() {
+        return tablero;
     }
 
     public void tirarDado() {
