@@ -3,14 +3,14 @@ package controlador;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
 
-public class GestorTablero {
+public class Gestor_Tablero {
 
     private static final int COLUMNAS = 5;  // Número de columnas del tablero
     private static final int FILAS = 10;    // Número de filas del tablero
     private GridPane tablero;
     private Circle[] jugadores;
 
-    public GestorTablero(GridPane tablero, Circle... jugadores) {
+    public Gestor_Tablero(GridPane tablero, Circle... jugadores) {
         this.tablero = tablero;
         this.jugadores = jugadores;
     }

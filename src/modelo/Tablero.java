@@ -96,6 +96,10 @@ public class Tablero {
         if (jugadores.size() == 1) {
             jugadorActual = jugador; // El primer jugador agregado es el primero en jugar
         }
+        // Pasa la referencia del tablero a cada jugador
+        for (Jugador j : jugadores) {
+            j.setTablero(this);  // Asumimos que tienes un setter setTablero en la clase Jugador
+        }
     }
 
     public void moverJugador(Jugador jugador, int avance) {
@@ -122,6 +126,7 @@ public class Tablero {
     public void ejecutarTurnoActual() {
         if (jugadorActual == null) return;
 
+        // Imprimir "Turno de Pinguino1" solo al comienzo del turno y no más tarde.
         System.out.println("Turno de " + jugadorActual.getNombre());
 
         // Verifica si el jugador ya está en la última casilla
@@ -130,8 +135,11 @@ public class Tablero {
             return; // Termina el turno si el jugador ya está en la última casilla
         }
 
+        // Lanzar el dado y mover al jugador
         jugadorActual.tirarDado();
         moverJugador(jugadorActual, jugadorActual.getPosicion()); // Mover según dado lanzado
-        actualizarTurno();
+        
+        // Ahora no es necesario llamar a actualizarTurno() en este punto.
+        // El flujo continuará al siguiente turno sin reiniciar el ciclo por error.
     }
 }

@@ -48,4 +48,9 @@ public class Jugador {
         System.out.println(nombre + " vuelve al inicio.");
         this.posicion = 0;
     }
+
+	public void setTablero(Tablero tablero) {
+		  this.tablero = tablero;
+		
+	}
 }

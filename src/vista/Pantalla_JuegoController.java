@@ -32,14 +32,15 @@ public class Pantalla_JuegoController {
     @FXML private Text nieve_t;
     @FXML private Text eventos;
 
-    // Game board and player pieces
+    // Game board and player piece
     @FXML private GridPane tablero;
-    @FXML private Circle P1;
+    @FXML private Circle P1;  
     @FXML private Circle P2;
     @FXML private Circle P3;
     @FXML private Circle P4;
+    @FXML private Circle P5;
     
-    //ONLY FOR TESTING!!!
+    // Position tracking
     private int p1Position = 0; // Tracks current position (from 0 to 49 in a 5x10 grid)
     private final int COLUMNS = 5;
 
@@ -91,16 +92,17 @@ public class Pantalla_JuegoController {
     private void moveP1(int steps) {
         p1Position += steps;
 
-        //Bound player
+        // Bound player
         if (p1Position >= 50) {
             p1Position = 49; // 5 columns * 10 rows = 50 cells (index 0 to 49)
+            eventos.setText("¡Has llegado al final del tablero!");
         }
 
-        //Check row and column
+        // Check row and column
         int row = p1Position / COLUMNS;
         int col = p1Position % COLUMNS;
 
-        //Change P1 property to match row and column
+        // Change P1 property to match row and column
         GridPane.setRowIndex(P1, row);
         GridPane.setColumnIndex(P1, col);
     }
