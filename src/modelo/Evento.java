@@ -1,5 +1,7 @@
 package modelo;
 
-public class Evento {
 
+
+public class Evento {
+	
 }
