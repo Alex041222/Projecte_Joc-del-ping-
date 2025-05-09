@@ -8,6 +8,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
+import modelo.Tablero;
+import modelo.Casilla; // Asegúrate de tener este import según tu estructura de paquetes
 
 public class Pantalla_JuegoController {
 
@@ -46,63 +48,58 @@ public class Pantalla_JuegoController {
 
     @FXML
     private void initialize() {
-        // This method is called automatically after the FXML is loaded
-        // You can set initial values or add listeners here
         eventos.setText("¡El juego ha comenzado!");
-    }
 
-    // Button and menu actions
+        // Instanciamos un nuevo tablero
+        Tablero tableroJuego = new Tablero();
+
+        // Mostramos los nombres de las casillas
+        mostrarTiposDeCasillasEnTablero(tableroJuego);
+    }
 
     @FXML
     private void handleNewGame() {
         System.out.println("New game.");
-        // TODO
+        // Aquí deberías crear un nuevo tablero y mostrarlo
+        // Tablero nuevoTablero = new Tablero();
+        // mostrarTiposDeCasillasEnTablero(nuevoTablero);
     }
 
     @FXML
     private void handleSaveGame() {
         System.out.println("Saved game.");
-        // TODO
     }
 
     @FXML
     private void handleLoadGame() {
         System.out.println("Loaded game.");
-        // TODO
+        // Tablero cargado = ...;
+        // mostrarTiposDeCasillasEnTablero(cargado);
     }
 
     @FXML
     private void handleQuitGame() {
         System.out.println("Exit...");
-        // TODO
     }
 
     @FXML
     private void handleDado(ActionEvent event) {
         Random rand = new Random();
         int diceResult = rand.nextInt(6) + 1;
-
-        // Update the Text 
         dadoResultText.setText("Ha salido: " + diceResult);
-
-        // Update the position
         moveP1(diceResult);
     }
 
     private void moveP1(int steps) {
         p1Position += steps;
-
-        // Bound player
         if (p1Position >= 50) {
-            p1Position = 49; // 5 columns * 10 rows = 50 cells (index 0 to 49)
+            p1Position = 49;
             eventos.setText("¡Has llegado al final del tablero!");
         }
 
-        // Check row and column
         int row = p1Position / COLUMNS;
         int col = p1Position % COLUMNS;
 
-        // Change P1 property to match row and column
         GridPane.setRowIndex(P1, row);
         GridPane.setColumnIndex(P1, col);
     }
@@ -110,24 +107,43 @@ public class Pantalla_JuegoController {
     @FXML
     private void handleRapido() {
         System.out.println("Fast.");
-        // TODO
     }
 
     @FXML
     private void handleLento() {
         System.out.println("Slow.");
-        // TODO
     }
 
     @FXML
     private void handlePeces() {
         System.out.println("Fish.");
-        // TODO
     }
 
     @FXML
     private void handleNieve() {
         System.out.println("Snow.");
-        // TODO
+    }
+
+    private void mostrarTiposDeCasillasEnTablero(Tablero t) {
+        tablero.getChildren().removeIf(node -> node instanceof Text);
+
+        for (int i = 0; i < t.getCasillas().size(); i++) {
+            Casilla casilla = t.getCasillas().get(i);
+
+            if (i == 0 || i == 49) continue;
+
+            String tipo = casilla.getClass().getSimpleName();
+
+            Text texto = new Text(tipo);
+            texto.setStyle("-fx-font-size: 14px; -fx-fill: black; -fx-font-weight: bold;");
+
+            int row = i / COLUMNS;
+            int col = i % COLUMNS;
+
+            GridPane.setRowIndex(texto, row);
+            GridPane.setColumnIndex(texto, col);
+
+            tablero.getChildren().add(texto);
+        }
     }
 }

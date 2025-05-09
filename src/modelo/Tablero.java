@@ -37,7 +37,7 @@ public class Tablero {
         // Reemplazar 1 casilla por CasillaOso
         int posOso = posicionesDisponibles.remove(0);
         casillas.set(posOso, new CasillaOso(posOso));
-
+        
         // Reemplazar 4 casillas por CasillaHielo
         for (int i = 0; i < 4; i++) {
             int posHielo = posicionesDisponibles.remove(0);
