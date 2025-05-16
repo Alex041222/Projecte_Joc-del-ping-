@@ -47,16 +47,27 @@ public class Tablero {
         // Reemplazar 2 casillas por Trineo
         for (int i = 0; i < 2; i++) {
             int posTrineo = posicionesDisponibles.remove(0);
-            casillas.set(posTrineo, new Trineo(posTrineo));  // No pasa la lista de jugadores
+            casillas.set(posTrineo, new Trineo(posTrineo));
         }
 
         // Reemplazar 2 casillas por Agujero
         for (int i = 0; i < 2; i++) {
             int posAgujero = posicionesDisponibles.remove(0);
-            casillas.set(posAgujero, new Agujero(posAgujero));  // No pasa la lista de jugadores
+            casillas.set(posAgujero, new Agujero(posAgujero));
         }
 
-        System.out.println("Tablero generado con 1 oso, 4 casillas de hielo, 2 trineos y 2 agujeros.");
+        // Añadir 3 casillas de interrogación (CasillaInterrogante)
+        for (int i = 0; i < 3; i++) {
+            int posInterrogante = posicionesDisponibles.remove(0);
+            casillas.set(posInterrogante, new Casella_interrogant(posInterrogante, posInterrogante));
+        }
+
+        System.out.println("Tablero generado con:");
+        System.out.println("- 1 oso");
+        System.out.println("- 4 casillas de hielo");
+        System.out.println("- 2 trineos");
+        System.out.println("- 2 agujeros");
+        System.out.println("- 3 casillas de interrogación");
     }
 
     public ArrayList<Casilla> getCasillas() {
