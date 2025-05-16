@@ -30,6 +30,7 @@ package vista;
 		   // This method is called automatically after the FXML is loaded
 		   // You can set initial values or add listeners here
 		   System.out.println("pantallaPrincipalController initialized");
+		   //PONERCONEXIONBASEDEDATOS
 	}
 
 	@FXML
