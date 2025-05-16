@@ -15,15 +15,15 @@ public class Casilla {
     public int getPosicion() {
         return posicion;
     }
-
+//actualizr pozicio
     public void setPosicion(int posicion) {
         this.posicion = posicion;
     }
-
+//llista jugadors
     public ArrayList<Jugador> getJugadoresActuales() {
         return jugadoresActuales;
     }
-
+//posar jugadors
     public void setJugadoresActuales(ArrayList<Jugador> jugadoresActuales) {
         this.jugadoresActuales = jugadoresActuales;
     }

@@ -8,7 +8,7 @@ public class Gestor_Jugador {
 	   // Llista de jugadors
     private final List<Jugador> jugadors = new ArrayList<>();
 
-    // Classe interna per a Jugador (sense getters/setters)
+    // Classe interna per a Jugador 
     public static class Jugador {
         public final String nom;
         public int puntuacio;
@@ -33,12 +33,12 @@ public class Gestor_Jugador {
         jugadors.add(new Jugador(nom, puntuacio));
     }
 
-    // Obtenir llista de jugadors (còpia)
+    // Obtenir llista de jugadors 
     public List<Jugador> getJugadors() {
         return new ArrayList<>(jugadors);
     }
 
-    // Eliminar jugador (sense break)
+    // Eliminar jugador 
     public void eliminarJugador(String nom) {
         boolean trobat = false;
         int i = 0;

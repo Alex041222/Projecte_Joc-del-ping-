@@ -5,7 +5,7 @@ public class Pingüino extends Jugador {
     public Pingüino(int posicion, String nombre, String color) {
         super(posicion, nombre, color);
     }
-
+//pelea pinguinos
     public void gestionarBatalla(Pingüino enemigo) {
         System.out.println("Batalla entre " + getNombre() + " y " + enemigo.getNombre());
 

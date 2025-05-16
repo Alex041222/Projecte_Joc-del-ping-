@@ -10,6 +10,7 @@ public class Gestor_Tablero {
     private GridPane tablero;
     private Circle[] jugadores;
 
+    //constructor de Gestor_Tablero
     public Gestor_Tablero(GridPane tablero, Circle... jugadores) {
         this.tablero = tablero;
         this.jugadores = jugadores;
