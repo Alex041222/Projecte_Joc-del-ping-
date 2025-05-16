@@ -1,95 +1,96 @@
 package vista;
 
-	import javafx.fxml.FXML;
-	import javafx.scene.control.Button;
-	import javafx.scene.control.MenuItem;
-	import javafx.scene.control.PasswordField;
-	import javafx.scene.control.TextField;
-	import javafx.fxml.FXMLLoader;
-	import javafx.scene.Parent;
-	import javafx.scene.Scene;
-	import javafx.stage.Stage;
-	import javafx.event.ActionEvent;
-	import javafx.scene.Node;
+import java.util.Random;
 
-	public class Pantalla_PrincipalController {
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
+import javafx.scene.Node;
 
-	@FXML private MenuItem newGame;
-	@FXML private MenuItem saveGame;
-    @FXML private MenuItem loadGame;
-	@FXML private MenuItem quitGame;
+import modelo.JugadorDAO;  // ← Importa el DAO
 
-	@FXML private TextField userField;
-	@FXML private PasswordField passField;
+public class Pantalla_PrincipalController {
 
-	@FXML private Button loginButton;
-	@FXML private Button registerButton;
+    // Ajusta aquí tus datos de conexión:
+    private static final boolean CENTRO     = true;      // true = URL_CENTRO, false = URL_FUERA
+    private static final String  USUARIO_BD = "YASMINA";
+    private static final String  PWD_BD     = "0000";
 
-	@FXML
-	private void initialize() {
-		// Este método se llama automáticamente después de cargar el FXML.
-		// Puede establecer valores iniciales o agregar oyentes aquí.
-		   System.out.println("pantallaPrincipalController initialized");
-		   //PONERCONEXIONBASEDEDATOS
-	}
-
-	@FXML
-	private void handleNewGame() {
-		   System.out.println("Se hizo clic en nuevo juego");
-		   // TODO
-	}
+    @FXML private MenuItem    newGame, saveGame, loadGame, quitGame;
+    @FXML private TextField   userField;
+    @FXML private PasswordField passField;
+    @FXML private Button      loginButton, registerButton;
 
     @FXML
-	private void handleSaveGame() {
-		  System.out.println("Se hizo clic en Guardar juego");
-		    // TODO
-	}
+    private void initialize() {
+        System.out.println("pantallaPrincipalController initialized");
+    }
 
-	@FXML
-	private void handleLoadGame() {
-		   System.out.println("Cargar juego hecho clic");
-		   // TODO
-	}
+    @FXML
+    private void handleRegister(ActionEvent event) {
+        String nombre = userField.getText().trim();
+        String pwd    = passField.getText().trim();
+        if (nombre.isEmpty() || pwd.isEmpty()) {
+            System.out.println("Debes rellenar usuario y contraseña.");
+            return;
+        }
 
-	 @FXML
-	private void handleQuitGame() {
-		   System.out.println("Se hizo clic para salir del juego");
-		   // TODO
-		   System.exit(0);
-	}
-		    
-	@FXML
-	//login
-	private void handleLogin(ActionEvent event) {
-		  String username = userField.getText();
-		  String password = passField.getText();
+        int idJugador = new Random().nextInt(1_000_000);
+        // Llamada al DAO para INSERT
+        JugadorDAO.insertar(
+            idJugador,
+            nombre,
+            pwd,
+            CENTRO,
+            USUARIO_BD,
+            PWD_BD
+        );
+    }
 
-		   System.out.println("Iniciar sesión presionado: " + username + " / " + password);
+    @FXML
+    private void handleLogin(ActionEvent event) {
+        String nombre = userField.getText().trim();
+        String pwd    = passField.getText().trim();
+        if (nombre.isEmpty() || pwd.isEmpty()) {
+            System.out.println("Debes rellenar usuario y contraseña.");
+            return;
+        }
 
-		  //  Cequeig bosic de login
-		   if (!username.isEmpty() && !password.isEmpty()) {
-		       try {
-		           FXMLLoader loader = new FXMLLoader(getClass().getResource("/pantallaJuego.fxml"));
-		           Parent pantallaJuegoRoot = loader.load();
+        // Llamada al DAO para SELECT de login
+        boolean ok = JugadorDAO.login(
+            nombre,
+            pwd,
+            CENTRO,
+            USUARIO_BD,
+            PWD_BD
+        );
 
-		           Scene pantallaJuegoScene = new Scene(pantallaJuegoRoot);
+        if (ok) {
+            System.out.println("Login exitoso: " + nombre);
+            try {
+                FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/pantallaJuego.fxml")
+                );
+                Parent root = loader.load();
+                Stage stage = (Stage)((Node)event.getSource())
+                                   .getScene()
+                                   .getWindow();
+                stage.setScene(new Scene(root));
+                stage.setTitle("Pantalla de Juego");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Usuario o contraseña incorrectos.");
+        }
+    }
 
-		           // consegir la stage actual amb el event
-		          Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		           stage.setScene(pantallaJuegoScene);
-		           stage.setTitle("Pantalla de Juego");
-		       } catch (Exception e) {
-		           e.printStackTrace();
-		       }
-		  } else {
-		       System.out.println("Por favor, introduzca su usuario y contraseña..");
-		  }
-	}
-
-
-	@FXML
-	private void handleRegister() {
-		  System.out.println("Registro presionado");
-		  // TODO
-	}
+    @FXML private void handleNewGame()  { System.out.println("Nuevo juego"); }
+    @FXML private void handleSaveGame() { System.out.println("Guardar juego"); }
+    @FXML private void handleLoadGame() { System.out.println("Cargar juego"); }
+    @FXML private void handleQuitGame() { System.exit(0); }
 }

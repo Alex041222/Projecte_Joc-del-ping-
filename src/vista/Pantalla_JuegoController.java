@@ -60,11 +60,20 @@ public class Pantalla_JuegoController {
     @FXML
     private void handleNewGame() {
         System.out.println("New game.");
-        // Aquí deberías crear un nuevo tablero y mostrarlo
-        // Tablero nuevoTablero = new Tablero();
-        // mostrarTiposDeCasillasEnTablero(nuevoTablero);
-    }
+        // 1. Crear nuevo tablero
+        Tablero nuevoTablero = new Tablero();
 
+        // 2. Mostrar las casillas del nuevo tablero
+        mostrarTiposDeCasillasEnTablero(nuevoTablero);
+
+        // 3. Reiniciar posición del jugador
+        p1Position = 0;
+        GridPane.setRowIndex(P1, 0);
+        GridPane.setColumnIndex(P1, 0);
+
+        // 4. Mensaje de estado
+        eventos.setText("¡Nuevo juego comenzado! Tablero reiniciado.");
+    }
     @FXML
     private void handleSaveGame() {
         System.out.println("Saved game.");
@@ -73,8 +82,21 @@ public class Pantalla_JuegoController {
     @FXML
     private void handleLoadGame() {
         System.out.println("Loaded game.");
-        // Tablero cargado = ...;
-        // mostrarTiposDeCasillasEnTablero(cargado);
+        // 1. Cargar tablero "simulado" (cuando no tienes aún conexión real)
+        Tablero cargado = new Tablero(); // Luego será desde la BD
+
+        // 2. Mostrar las casillas
+        mostrarTiposDeCasillasEnTablero(cargado);
+
+        // 3. Simular que el jugador estaba en la casilla 10, por ejemplo
+        p1Position = 10;
+        int row = p1Position / COLUMNS;
+        int col = p1Position % COLUMNS;
+        GridPane.setRowIndex(P1, row);
+        GridPane.setColumnIndex(P1, col);
+
+        // 4. Mostrar mensaje
+        eventos.setText("Partida cargada. Jugador en casilla " + p1Position + ".");
     }
 
     @FXML

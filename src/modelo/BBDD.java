@@ -1,11 +1,21 @@
 package modelo;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 import java.sql.*;
 import java.util.Scanner;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class BBDD {
 	public static Connection conectarBaseDatos() {
         Connection con = null;
+        
 
         System.out.println("Intentando conectarse a la base de datos");
         System.out.println("Selecciona centro o fuera de centro: (CENTRO/FUERA)");
@@ -38,4 +48,10 @@ public class BBDD {
 
         return con;
     }
+
+	public static Connection conectar(boolean esCentro, String usuarioBd, String pwdBd) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

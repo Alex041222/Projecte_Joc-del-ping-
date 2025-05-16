@@ -5,39 +5,48 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import modelo.BBDD;
+import java.sql.*;
 public class Gestor_Usuario {
-	  public static void registrarJugador(Connection con, int id, String nombre, String contraseña) {
-	        String sql = "INSERT INTO Jugador (id_jugador, nombrejugador, contraseña) VALUES (?, ?, ?)";
 
-	        try (PreparedStatement pst = con.prepareStatement(sql)) {
-	            pst.setInt(1, id);
-	            pst.setString(2, nombre);
-	            pst.setString(3, contraseña);
-	            pst.executeUpdate();
-	            System.out.println("Jugador registrado con éxito.");
-	        } catch (SQLException e) {
-	            System.out.println("Error al registrar jugador: " + e.getMessage());
-	        }
-	    }
+	 /** Inserta usando la conexión ya abierta */
+    public static void registrarJugador(Connection con,
+                                         int idJugador,
+                                         String nombre,
+                                         String pwd) throws SQLException {
+        String sqlCheck  = "SELECT COUNT(*) FROM Jugador WHERE nombrejugador = ?";
+        String sqlInsert = "INSERT INTO Jugador (id_jugador,nombrejugador,contraseña) VALUES (?,?,?)";
 
-	    public static boolean loginJugador(Connection con, String nombre, String contraseña) {
-	        String sql = "SELECT * FROM Jugador WHERE nombrejugador = ? AND contraseña = ?";
+        // 1) compruebo si existe
+        try (PreparedStatement ps = con.prepareStatement(sqlCheck)) {
+            ps.setString(1, nombre);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            if (rs.getInt(1) > 0) {
+                System.out.println("ERROR: el usuario '" + nombre + "' ya existe.");
+                return;
+            }
+        }
+        // 2) inserto
+        try (PreparedStatement ps = con.prepareStatement(sqlInsert)) {
+            ps.setInt(1, idJugador);
+            ps.setString(2, nombre);
+            ps.setString(3, pwd);
+            ps.executeUpdate();
+            System.out.println("Jugador registrado con éxito (ID=" + idJugador + ").");
+        }
+    }
 
-	        try (PreparedStatement pst = con.prepareStatement(sql)) {
-	            pst.setString(1, nombre);
-	            pst.setString(2, contraseña);
-	            ResultSet rs = pst.executeQuery();
-
-	            if (rs.next()) {
-	                System.out.println("Login exitoso. Bienvenido, " + nombre);
-	                return true;
-	            } else {
-	                System.out.println("Nombre o contraseña incorrectos.");
-	                return false;
-	            }
-	        } catch (SQLException e) {
-	            System.out.println("Error en el login: " + e.getMessage());
-	            return false;
-	        }
-	    }
-	}
+    /** Comprueba credenciales usando la conexión ya abierta */
+    public static boolean loginJugador(Connection con,
+                                       String nombre,
+                                       String pwd) throws SQLException {
+        String sql = "SELECT 1 FROM Jugador WHERE nombrejugador = ? AND contraseña = ?";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, nombre);
+            ps.setString(2, pwd);
+            ResultSet rs = ps.executeQuery();
+            return rs.next();
+        }
+    }
+}
