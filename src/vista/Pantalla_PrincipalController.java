@@ -11,12 +11,12 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 
-import modelo.JugadorDAO;  // ← Importa el DAO
+import modelo.JugadorDAO;
 
 public class Pantalla_PrincipalController {
 
     // Ajusta aquí tus datos de conexión:
-    private static final boolean CENTRO     = true;      // true = URL_CENTRO, false = URL_FUERA
+    private static final boolean CENTRO     = true;
     private static final String  USUARIO_BD = "YASMINA";
     private static final String  PWD_BD     = "0000";
 
@@ -40,15 +40,14 @@ public class Pantalla_PrincipalController {
         }
 
         int idJugador = new Random().nextInt(1_000_000);
-        // Llamada al DAO para INSERT
-        JugadorDAO.insertar(
-            idJugador,
-            nombre,
-            pwd,
-            CENTRO,
-            USUARIO_BD,
-            PWD_BD
-        );
+
+        try {
+            JugadorDAO.insertar(idJugador, nombre, pwd, CENTRO, USUARIO_BD, PWD_BD);
+            System.out.println("Jugador registrado con éxito (ID=" + idJugador + ")");
+        } catch (Exception e) {
+            System.err.println("Error al registrar jugador: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -60,14 +59,14 @@ public class Pantalla_PrincipalController {
             return;
         }
 
-        // Llamada al DAO para SELECT de login
-        boolean ok = JugadorDAO.login(
-            nombre,
-            pwd,
-            CENTRO,
-            USUARIO_BD,
-            PWD_BD
-        );
+        boolean ok;
+        try {
+            ok = JugadorDAO.existe(nombre, pwd, CENTRO, USUARIO_BD, PWD_BD);
+        } catch (Exception e) {
+            System.err.println("Error durante login: " + e.getMessage());
+            e.printStackTrace();
+            return;
+        }
 
         if (ok) {
             System.out.println("Login exitoso: " + nombre);
@@ -76,9 +75,7 @@ public class Pantalla_PrincipalController {
                     getClass().getResource("/pantallaJuego.fxml")
                 );
                 Parent root = loader.load();
-                Stage stage = (Stage)((Node)event.getSource())
-                                   .getScene()
-                                   .getWindow();
+                Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
                 stage.setScene(new Scene(root));
                 stage.setTitle("Pantalla de Juego");
             } catch (Exception e) {

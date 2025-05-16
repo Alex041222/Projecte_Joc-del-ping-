@@ -15,26 +15,14 @@ import java.sql.SQLException;
 public class BBDD {
 	public static Connection conectarBaseDatos() {
         Connection con = null;
-        
 
-        System.out.println("Intentando conectarse a la base de datos");
-        System.out.println("Selecciona centro o fuera de centro: (CENTRO/FUERA)");
-
-        Scanner scan = new Scanner(System.in);
-        String s = scan.nextLine().toLowerCase();
-
-        String URL;
-        if(s.equals("centro")) {
+        String
             URL = "jdbc:oracle:thin:@//192.168.3.26:1521/XEPDB2";
-        } else {
-            URL = "jdbc:oracle:thin:@//oracle.ilerna.com:1521/XEPDB2";
-        }
+      
+        String USER = "DM2425_PIN_GRUP08";
 
-        System.out.println("¿Usuario?");
-        String USER = scan.nextLine();
-
-        System.out.println("¿Contraseña?");
-        String PWD = scan.nextLine();
+     
+        String PWD = "ABBMR08";
 
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
