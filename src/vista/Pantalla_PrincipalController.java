@@ -27,44 +27,45 @@ package vista;
 
 	@FXML
 	private void initialize() {
-		   // This method is called automatically after the FXML is loaded
-		   // You can set initial values or add listeners here
+		// Este método se llama automáticamente después de cargar el FXML.
+		// Puede establecer valores iniciales o agregar oyentes aquí.
 		   System.out.println("pantallaPrincipalController initialized");
 	}
 
 	@FXML
 	private void handleNewGame() {
-		   System.out.println("New Game clicked");
+		   System.out.println("Se hizo clic en nuevo juego");
 		   // TODO
 	}
 
     @FXML
 	private void handleSaveGame() {
-		  System.out.println("Save Game clicked");
+		  System.out.println("Se hizo clic en Guardar juego");
 		    // TODO
 	}
 
 	@FXML
 	private void handleLoadGame() {
-		   System.out.println("Load Game clicked");
+		   System.out.println("Cargar juego hecho clic");
 		   // TODO
 	}
 
 	 @FXML
 	private void handleQuitGame() {
-		   System.out.println("Quit Game clicked");
+		   System.out.println("Se hizo clic para salir del juego");
 		   // TODO
 		   System.exit(0);
 	}
 		    
 	@FXML
+	//login
 	private void handleLogin(ActionEvent event) {
 		  String username = userField.getText();
 		  String password = passField.getText();
 
-		   System.out.println("Login pressed: " + username + " / " + password);
+		   System.out.println("Iniciar sesión presionado: " + username + " / " + password);
 
-		  // Basic check (just for demo, replace with real login logic)
+		  //  Cequeig bosic de login
 		   if (!username.isEmpty() && !password.isEmpty()) {
 		       try {
 		           FXMLLoader loader = new FXMLLoader(getClass().getResource("/pantallaJuego.fxml"));
@@ -72,7 +73,7 @@ package vista;
 
 		           Scene pantallaJuegoScene = new Scene(pantallaJuegoRoot);
 
-		           // Get the current stage using the event
+		           // consegir la stage actual amb el event
 		          Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		           stage.setScene(pantallaJuegoScene);
 		           stage.setTitle("Pantalla de Juego");
@@ -80,14 +81,14 @@ package vista;
 		           e.printStackTrace();
 		       }
 		  } else {
-		       System.out.println("Please. Enter user and password.");
+		       System.out.println("Por favor, introduzca su usuario y contraseña..");
 		  }
 	}
 
 
 	@FXML
 	private void handleRegister() {
-		  System.out.println("Register pressed");
+		  System.out.println("Registro presionado");
 		  // TODO
 	}
 }

@@ -7,7 +7,7 @@ import javafx.scene.Parent;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-
+//cage el joc
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		//System.out.println(getClass().getResource("/PantallaPrincipal.fxml"));

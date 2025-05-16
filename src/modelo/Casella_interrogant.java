@@ -48,7 +48,7 @@ package modelo;
 	        System.out.println("\nInventario actualizado:");
 	        mostrarContenidoInventario(inventario);
 	    }
-
+//mostre el invenati
 	    private void mostrarContenidoInventario(Inventario inventario) {
 	        int bolasNieve = contarItems(inventario, "Bola de Nieve");
 	        int peces = contarItems(inventario, "Peix");
@@ -56,7 +56,7 @@ package modelo;
 	        System.out.println(" - Boles de neu: " + bolasNieve);
 	        System.out.println(" - Peixos: " + peces);
 	    }
-
+//mostre el numero de items
 	    private int contarItems(Inventario inventario, String nombreItem) {
 	        int contador = 0;
 	        for (Item item : inventario.getLista()) {

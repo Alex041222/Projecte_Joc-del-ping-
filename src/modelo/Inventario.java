@@ -6,10 +6,11 @@ public class Inventario {
 
     private ArrayList<Item> lista;
 
+    //constructor del inventario
     public Inventario() {
         this.lista = new ArrayList<>();
     }
-
+//llista de ietems
     public ArrayList<Item> getLista() {
         return lista;
     }

@@ -22,7 +22,7 @@ public class Gestor_Partidas {
             partidas.add(nombrePartida);
         }
     }
-
+    // Guarda la partida
     public List<String> getPartidas() {
         return new ArrayList<>(partidas); // Copia para evitar modificaciones externas
     }

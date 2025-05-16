@@ -12,7 +12,7 @@ public class Item {
     public String getNombre() {
         return nombre;
     }
-
+    //posar nom item
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
